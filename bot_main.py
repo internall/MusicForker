@@ -48,7 +48,7 @@ def helpcommand(message):
 
 @bot.message_handler(commands=['mp4'])
 def mp4setting(message):
-<<<<<<< Updated upstream
+
     def WritetoJSONFile(path, filename, data):
         filePathNameWExt = './' + filename
         with open(filePathNameWExt, 'w') as fp:
@@ -62,7 +62,7 @@ def mp4setting(message):
     data['userid'] = userid
 
     WritetoJSONFile('./',filename, data)
-=======
+
 
     userid = message.chat.id
 
@@ -76,7 +76,7 @@ def mp4setting(message):
                 json.dump(data, json_file)
             a+=1
     user()
->>>>>>> Stashed changes
+
 
     bot.reply_to(message, "I prossimi file verranno scaricati in formato mp4!")
     print("Added 1 user preference to users.json: " + str(data))
@@ -90,20 +90,17 @@ def mp3setting(message):
             json.dump(data, fp)
 
     filename = 'users.json'
-    userid = message.chat.id;
-<<<<<<< Updated upstream
+    userid = message.chat.id
 
     data = {}
     data['setting'] = 'mp3'
     data['userid'] = userid
-=======
+
     usersdata = json.loads(filename)
 
     data = data[userid].append({
     'format': 'mp3'
     })
-
->>>>>>> Stashed changes
 
     WritetoJSONFile('./',filename, data)
 
