@@ -48,6 +48,7 @@ def helpcommand(message):
 
 @bot.message_handler(commands=['mp4'])
 def mp4setting(message):
+<<<<<<< Updated upstream
     def WritetoJSONFile(path, filename, data):
         filePathNameWExt = './' + filename
         with open(filePathNameWExt, 'w') as fp:
@@ -61,9 +62,24 @@ def mp4setting(message):
     data['userid'] = userid
 
     WritetoJSONFile('./',filename, data)
+=======
+
+    userid = message.chat.id
+
+    data = {}
+    def user():
+        global data
+        a = 0
+        while a<5:
+            data[userid] = {'format': 'mp4'}
+            with open('users.json', 'w') as json_file:
+                json.dump(data, json_file)
+            a+=1
+    user()
+>>>>>>> Stashed changes
 
     bot.reply_to(message, "I prossimi file verranno scaricati in formato mp4!")
-    print("Added 1 user preference to users.json")
+    print("Added 1 user preference to users.json: " + str(data))
 
 @bot.message_handler(commands=['mp3'])
 def mp3setting(message):
@@ -75,10 +91,19 @@ def mp3setting(message):
 
     filename = 'users.json'
     userid = message.chat.id;
+<<<<<<< Updated upstream
 
     data = {}
     data['setting'] = 'mp3'
     data['userid'] = userid
+=======
+    usersdata = json.loads(filename)
+
+    data = data[userid].append({
+    'format': 'mp3'
+    })
+
+>>>>>>> Stashed changes
 
     WritetoJSONFile('./',filename, data)
 
@@ -98,8 +123,11 @@ def echo_message(message):
 
     if directlink == True:
         if inputelement.startswith("https://music.youtube.com"):
-            inputelement.replace("&list=", "")
-            print(inputelement)
+            string = '&list='+ inputelement.split('&list=')[-1]
+            # Link without music list
+            ytmlink = inputelement[:-len(string)]
+            inputelement.rsplit("&list=", 1)[0]
+
         #Print loading
         bot.reply_to(message, '⚙️Download del video:\n' + inputelement + ' ...(30%)')
 
